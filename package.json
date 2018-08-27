@@ -1,6 +1,6 @@
 {
   "name": "less-bundle-promise",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A package bundler for Less",
   "author": {
     "name": "mzohaibqc",
@@ -22,7 +22,7 @@
     "type": "git",
     "url": "git://github.com/mzohaibqc/less-bundle-promise"
   },
-  "main": "index.js",
+  "main": "build/index.js",
   "homepage": "https://github.com/mzohaibqc/less-bundle-promise",
   "engines": {
     "node": ">=0.10.0"
@@ -36,7 +36,7 @@
     "url": "https://github.com/mzohaibqc/less-bundle-promise/issues"
   },
   "scripts": {
-    "build": "tsc --outDir build src/index.ts",
+    "build": "tsc --lib es2015,dom --outDir build src/index.ts",
     "predeploy": "cp package.json build/package.json && cp README.md build/README.md",
     "deploy": "npm publish"
   }

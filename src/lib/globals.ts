@@ -11,11 +11,6 @@ export interface IConfig {
   src: string;
 
   /**
-   * The path to a node_modules directory
-   */
-  nodeModulesPath: string;
-
-  /**
    * An array of destination file paths. Once the framework 
    * is built, it will be output to these paths.
    */
@@ -108,8 +103,6 @@ export var config: IConfig,
 
   // Finds the string literal in a string
   stringLiteralRegex = /.*(?:'|")(.*)(?:'|").*/,
-
-  nodeModulesPath = '',
 
   // Tests for less file
   lessFileRegex = /.less$/,

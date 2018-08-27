@@ -11,7 +11,6 @@ function buildContents(lines: Array<string>, filePath: string) {
         lessRegex = globals.lessFileRegex,
         cssRegex = globals.cssFileRegex,
         stringLiteralRegex = globals.stringLiteralRegex,
-        nodeModulesPath = globals.nodeModulesPath || '',
         currentLines: Array<string> = [],
         line: string,
         hashPath: string,
@@ -38,8 +37,8 @@ function buildContents(lines: Array<string>, filePath: string) {
                 imported += '.less';
             }
 
-            if (nodeModulesPath && imported.match(/@import ('||")~/ig)) {
-                hashPath = imported.replace('~', nodeModulesPath.endsWith('/') ? nodeModulesPath : `${nodeModulesPath}/`);
+            if (imported.match(/^~/)) {
+                hashPath = imported.replace('~', path.join(__dirname, '../../'));
             } else {
                 hashPath = path.resolve(filePath, '..', imported);
             }
