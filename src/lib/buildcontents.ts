@@ -11,6 +11,7 @@ function buildContents(lines: Array<string>, filePath: string) {
         lessRegex = globals.lessFileRegex,
         cssRegex = globals.cssFileRegex,
         stringLiteralRegex = globals.stringLiteralRegex,
+        nodeModulesPath = globals.nodeModulesPath || '',
         currentLines: Array<string> = [],
         line: string,
         hashPath: string,
@@ -37,7 +38,11 @@ function buildContents(lines: Array<string>, filePath: string) {
                 imported += '.less';
             }
 
-            hashPath = path.resolve(filePath, '..', imported);
+            if (nodeModulesPath && imported.match(/@import ('||")~/ig)) {
+                hashPath = imported.replace('~', nodeModulesPath.endsWith('/') ? nodeModulesPath : `${nodeModulesPath}/`);
+            } else {
+                hashPath = path.resolve(filePath, '..', imported);
+            }
             if (typeof imports[hashPath] === 'undefined') {
                 imports[hashPath] = true;
                 file = fs.readFileSync(hashPath, 'utf8');
