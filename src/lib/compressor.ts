@@ -37,6 +37,7 @@ function compress(config?: globals.IConfig) {
       writers = globals.writers,
       output = globals.output,
       dest = globals.config.dest,
+      clear = globals.clear,
       version = globals.config.version,
       license = globals.config.license;
 
@@ -127,7 +128,7 @@ function compress(config?: globals.IConfig) {
             .catch(error => reject(error));
         });
       }
-
+      clear();
       resolve(output.join('\n'));
     });
   });
