@@ -32,6 +32,11 @@ export interface IConfig {
    * license will be replaced with the version.
    */
   license?: string;
+
+  /**
+   * Clear global cache var
+   */
+  clear?: Function;
 }
 
 export interface IObject<T> {
@@ -83,6 +88,15 @@ export function initialize(cfg: IConfig) {
   }
 
   return config;
+}
+
+/**
+ * Clear cache
+ */
+export function clear() {
+  writers = [];
+  output = [];
+  imports = {};
 }
 
 export var config: IConfig,
